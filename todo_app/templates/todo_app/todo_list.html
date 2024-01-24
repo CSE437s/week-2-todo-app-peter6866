@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div> 
+    <h3>Edit list:</h3>
+    <h5>{{ todo_list.title | upper }}</h5>
+
+    <ul>
+        {% for todo in object_list %}
+            <li>
+                <div role="button" onclick="location.href='{% url 'item-update' todo_list.id todo.id %}'">
+                    {{ todo.name }} (Due {{ todo.due | date:"l, F j" }})
+                </div>
+            </li>
+        {% empty %}
+            <li>There are no to-do items in this list.</li>
+        {% endfor %} 
+    </ul>
+
+    <input
+        class="btn"
+        value="Add a new item"
+        type="button"
+        onclick="location.href='{% url 'item-add' todo_list.id %}'" />
+</div>
+{% endblock %}
